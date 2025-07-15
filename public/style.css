@@ -1,0 +1,51 @@
+body {
+    font-family: Special Elite;
+}
+
+button, input {
+    font-family: Special Elite;
+}
+
+h1 {
+    font-family: "Manufacturing Consent", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    border-top: black 8px solid;
+    border-bottom: black 8px solid;
+    font-size: 5vw;
+    margin: 0;
+}
+
+h2 {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 3vw;
+}
+
+h3 {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 2vw;
+}
+
+label {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 4vw;
+}
+
+article {
+    display: grid;
+    grid-template-columns: 40% 40% 20%;
+    column-gap: 10px;
+    border-top: black 4px solid;
+    border-bottom: black 4px solid;
+}
+
+.center-children {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.border-left {
+    border-left: black 2px solid;
+}

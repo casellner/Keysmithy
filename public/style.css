@@ -32,6 +32,10 @@ label {
     font-size: 4vw;
 }
 
+p {
+    font-size: 1vw;
+}
+
 article {
     display: grid;
     grid-template-columns: 40% 40% 20%;
@@ -48,4 +52,14 @@ article {
 
 .border-left {
     border-left: black 2px solid;
+}
+
+.resource-group {
+    display: flex;
+    justify-content: center;
+}
+
+#rock-resource {
+    height: 2vw;
+    width: auto;
 }

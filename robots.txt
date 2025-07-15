@@ -1,0 +1,6 @@
+# robots.txt for Keysmithy, a typing game with resource-gathering and crafting elements
+
+User-agent: *
+Disallow:
+
+Sitemap: https://keysmithy.com/sitemap.xml

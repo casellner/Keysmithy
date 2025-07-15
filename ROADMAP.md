@@ -6,3 +6,4 @@
 - Add tree/wood resource
 - make permanent favicon (K key)
 - use realfavicongenerator.net to make many favicons
+- GitHub action to update sitemap on push to main

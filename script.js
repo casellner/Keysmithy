@@ -24,21 +24,36 @@ const words = [
         "mar", "pro", "aug", "ago", "apr", "via", "bad", "far", "jun", "oil"
     ]
 ];
-let score = 0;
+let numRock = 0;
+let numWood = 0;
 let pickPower = 1;
+let axePower = 1;
 let pickUpgradeCost = 10;
 let activeResource = "rock";
 
 function generateRandomWord() {
-    const wordIndex = Math.min(pickPower - 1, words.length - 1); // access word subarray at pickPower - 1, but not past the length of the array
+    let wordIndex
+    if (activeResource === "rock") {
+        wordIndex = Math.min(pickPower - 1, words.length - 1); // access word subarray at pickPower - 1, but not past the length of the array
+    } else if (activeResource === "wood") {
+        wordIndex = Math.min(axePower - 1, words.length - 1); // access word subarray at axePower - 1, but not past the length of the array
+    }
+    
     let rand = Math.floor(Math.random() * words[wordIndex].length); // generate a random integer from 0 to words[wordIndex].length (a valid element of words array)
     randomWord = words[wordIndex][rand];
-    document.getElementById('inputLabel').innerHTML = randomWord;
+
+    document.getElementById('rock-input-label').innerHTML = randomWord;
+    document.getElementById('wood-input-label').innerHTML = randomWord;
 }
 
-function increaseScore(amount) {
-    score += amount;
-    document.getElementById('score').innerHTML = score;
+function increaseRock(amount) {
+    numRock += amount;
+    document.getElementById('num-rock').innerHTML = numRock;
+}
+
+function increaseWood(amount) {
+    numWood += amount;
+    document.getElementById('num-wood').innerHTML = numWood;
 }
 
 function updateShopPrices() {
@@ -55,13 +70,15 @@ function toggleResource() {
         document.getElementById('rock-article').hidden = false;
         document.getElementById('wood-article').hidden = true;
     }
+
+    generateRandomWord();
     //console.log(activeResource);
 }
 
 function upgradePick() {
     console.log("upgradePick called");
-    if (score >= pickUpgradeCost) { // if the player has enough to spend
-        increaseScore(-pickUpgradeCost);
+    if (numRock >= pickUpgradeCost) { // if the player has enough to spend
+        increaseRock(-pickUpgradeCost);
         pickPower += 1;
 
         pickUpgradeCost += 10;
@@ -85,7 +102,16 @@ rockInput.addEventListener('input', function () {
     if (this.value === randomWord) { // if the user typed the word correctly
         console.log("Nice! You typed:", this.value);
         this.value = ''; // Reset input
-        increaseScore(pickPower);
+        increaseRock(pickPower);
+        generateRandomWord();
+    }
+});
+
+woodInput.addEventListener('input', function () {
+    if (this.value === randomWord) { // if the user typed the word correctly
+        console.log("Nice! You typed:", this.value);
+        this.value = ''; // Reset input
+        increaseWood(axePower);
         generateRandomWord();
     }
 });

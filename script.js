@@ -67,10 +67,12 @@ function toggleResource() {
         activeResource = "wood";
         document.getElementById('wood-article').hidden = false;
         document.getElementById('rock-article').hidden = true;
+        document.getElementById('wood-input').focus();
     } else {
         activeResource = "rock";
         document.getElementById('rock-article').hidden = false;
         document.getElementById('wood-article').hidden = true;
+        document.getElementById('rock-input').focus();
     }
 
     generateRandomWord();

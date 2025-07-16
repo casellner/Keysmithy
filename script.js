@@ -76,10 +76,12 @@ generateRandomWord(); // generate first word
 updateShopPrices();
 
 // event listeners for detecting correct input and keystrokes
-const input = document.getElementById('myInput');
-const rock = document.getElementById("rock");
+const rockInput = document.getElementById('rock-input');
+const woodInput = document.getElementById('wood-input');
+const rockImg = document.getElementById("rock-img");
+const woodImg = document.getElementById("wood-img");
 
-input.addEventListener('input', function () {
+rockInput.addEventListener('input', function () {
     if (this.value === randomWord) { // if the user typed the word correctly
         console.log("Nice! You typed:", this.value);
         this.value = ''; // Reset input
@@ -89,13 +91,14 @@ input.addEventListener('input', function () {
 });
 
 window.addEventListener("keydown", () => {
-    if (input === document.activeElement) {
-        rock.src = "./public/rock_pressed.png";
+    if (rockInput === document.activeElement) {
+        rockImg.src = "./public/rock_pressed.png";
+    } else if (woodInput == document.activeElement) {
+        woodImg.src = "./public/rock_pressed.png";
     }
 });
 
 window.addEventListener("keyup", () => {
-    if (input === document.activeElement) {
-        rock.src = "./public/rock_idle.png";
-    }
+    rockImg.src = "./public/rock_idle.png";
+    woodImg.src = "./public/rock_idle.png"
 });

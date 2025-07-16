@@ -65,6 +65,8 @@ p {
 .resource-icon {
     height: 2vw;
     width: auto;
+    margin-left: 15px;
+    margin-right: 5px;
 }
 
 #sponsor {

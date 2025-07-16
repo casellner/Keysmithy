@@ -27,6 +27,7 @@ const words = [
 let score = 0;
 let pickPower = 1;
 let pickUpgradeCost = 10;
+let activeResource = "rock";
 
 function generateRandomWord() {
     const wordIndex = Math.min(pickPower - 1, words.length - 1); // access word subarray at pickPower - 1, but not past the length of the array
@@ -42,6 +43,19 @@ function increaseScore(amount) {
 
 function updateShopPrices() {
     document.getElementById('pickCost').innerHTML = pickUpgradeCost;
+}
+
+function toggleResource() {
+    if (activeResource === "rock") {
+        activeResource = "wood";
+        document.getElementById('wood-article').hidden = false;
+        document.getElementById('rock-article').hidden = true;
+    } else {
+        activeResource = "rock";
+        document.getElementById('rock-article').hidden = false;
+        document.getElementById('wood-article').hidden = true;
+    }
+    //console.log(activeResource);
 }
 
 function upgradePick() {

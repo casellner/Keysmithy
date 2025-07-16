@@ -30,24 +30,38 @@
             <img id="rock-resource" src="./public/rock_resource.png">
             <p id="score">0</p>
         </div>
+        <div class="resource-group">
+            <img id="wood-resource" src="./public/rock_resource.png">
+            <p id="num-wood">0</p>
+        </div>
     </header>
 
-    <article>
-        <img id="rock" src="./public/rock_idle.png">
+    <div id="row1">
+        <article id="rock-article">
+            <img id="rock" src="./public/rock_idle.png">
 
-        <div>
             <h2>Type to Mine</h2>
             <label id="inputLabel" for="myInput"></label>
             <br>
             <textarea id="myInput" placeholder="Type here"></textarea>
-            <button hidden>Switch resources</button>
-        </div>
+            <br>
+            <button onClick="toggleResource()">Switch resources</button>
+        </article>
+
+        <article id="wood-article" hidden>
+            <h2>Type to Chop</h2>
+            <label id="inputLabel" for="myInput"></label>
+            <br>
+            <textarea id="myInput" placeholder="Type here"></textarea>
+            <br>
+            <button onClick="toggleResource()">Switch resources</button>
+        </article>
 
         <div class="center-children border-left">
             <h3>Brought to You By</h3>
             <img id="sponsor" src="./public/Tridev Logo.svg">
         </div>
-    </article>
+    </div>
 
     <div> <!-- SHOP -->
         <h2>Shop</h2>

@@ -35,9 +35,9 @@ p {
     font-size: 1vw;
 }
 
-article {
+#row1 {
     display: grid;
-    grid-template-columns: 40% 40% 20%;
+    grid-template-columns: 80% 20%;
     border-top: black 4px solid;
     border-bottom: black 4px solid;
 }
@@ -57,7 +57,7 @@ article {
     justify-content: center;
 }
 
-#rock-resource {
+.resource-group img {
     height: 2vw;
     width: auto;
 }

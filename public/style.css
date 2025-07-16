@@ -39,7 +39,6 @@ p {
 article {
     display: grid;
     grid-template-columns: 40% 40% 20%;
-    column-gap: 10px;
     border-top: black 4px solid;
     border-bottom: black 4px solid;
 }

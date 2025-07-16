@@ -29,6 +29,7 @@ let numWood = 0;
 let pickPower = 1;
 let axePower = 1;
 let pickUpgradeCost = 10;
+let axeUpgradeCost = 10;
 let activeResource = "rock";
 
 function generateRandomWord() {
@@ -57,7 +58,8 @@ function increaseWood(amount) {
 }
 
 function updateShopPrices() {
-    document.getElementById('pickCost').innerHTML = pickUpgradeCost;
+    document.getElementById('pick-cost').innerHTML = pickUpgradeCost;
+    document.getElementById('axe-cost').innerHTML = axeUpgradeCost;
 }
 
 function toggleResource() {
@@ -76,12 +78,23 @@ function toggleResource() {
 }
 
 function upgradePick() {
-    console.log("upgradePick called");
     if (numRock >= pickUpgradeCost) { // if the player has enough to spend
         increaseRock(-pickUpgradeCost);
         pickPower += 1;
 
         pickUpgradeCost += 10;
+        updateShopPrices();
+
+        generateRandomWord(); // reset the word now that it is longer
+    }
+}
+
+function upgradeAxe() {
+    if (numWood >= axeUpgradeCost) { // if the player has enough to spend
+        increaseWood(-axeUpgradeCost);
+        axePower += 1;
+
+        axeUpgradeCost += 10;
         updateShopPrices();
 
         generateRandomWord(); // reset the word now that it is longer

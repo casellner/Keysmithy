@@ -35,14 +35,19 @@ p {
     font-size: 1vw;
 }
 
-#row1 {
+.row1 {
     display: grid;
     grid-template-columns: 80% 20%;
     border-top: black 4px solid;
     border-bottom: black 4px solid;
 }
 
-.center-children {
+.row2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.center-column {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,12 +57,12 @@ p {
     border-left: black 2px solid;
 }
 
-.resource-group {
+.justify-center {
     display: flex;
     justify-content: center;
 }
 
-.resource-group img {
+.resource-icon {
     height: 2vw;
     width: auto;
 }

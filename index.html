@@ -26,38 +26,50 @@
 <body>
     <header>
         <h1>Keysmithy (alpha version)</h1>
-        <div class="resource-group">
-            <img id="rock-resource" src="./public/rock_resource.png">
-            <p id="score">0</p>
-        </div>
-        <div class="resource-group">
-            <img id="wood-resource" src="./public/rock_resource.png">
-            <p id="num-wood">0</p>
+        <div  class="justify-center">
+            <div class="justify-center">
+                <img class="resource-icon" src="./public/rock_resource.png">
+                <p id="score">0</p>
+            </div>
+            <div class="justify-center">
+                <img class="resource-icon" src="./public/rock_resource.png">
+                <p id="num-wood">0</p>
+            </div>
         </div>
     </header>
 
-    <div id="row1">
+    <div class="row1">
         <article id="rock-article">
-            <img id="rock" src="./public/rock_idle.png">
+            <div class="row2">
+                <img id="rock" src="./public/rock_idle.png">
 
-            <h2>Type to Mine</h2>
-            <label id="inputLabel" for="myInput"></label>
-            <br>
-            <textarea id="myInput" placeholder="Type here"></textarea>
-            <br>
-            <button onClick="toggleResource()">Switch resources</button>
+                <div>
+                    <h2>Type to Mine</h2>
+                    <label id="inputLabel" for="myInput"></label>
+                    <br>
+                    <textarea id="myInput" placeholder="Type here"></textarea>
+                    <br>
+                    <button onClick="toggleResource()">Switch resources</button>
+                </div>
+            </div>
         </article>
 
         <article id="wood-article" hidden>
-            <h2>Type to Chop</h2>
-            <label id="inputLabel" for="myInput"></label>
-            <br>
-            <textarea id="myInput" placeholder="Type here"></textarea>
-            <br>
-            <button onClick="toggleResource()">Switch resources</button>
+            <div class="row2">
+                <img id="wood" src="./public/rock_idle.png">
+
+                <div>
+                    <h2>Type to Chop</h2>
+                    <label id="inputx" for="myx"></label>
+                    <br>
+                    <textarea id="myx" placeholder="Type here"></textarea>
+                    <br>
+                    <button onClick="toggleResource()">Switch resources</button>
+                </div>
+            </div>
         </article>
 
-        <div class="center-children border-left">
+        <div class="center-column border-left">
             <h3>Brought to You By</h3>
             <img id="sponsor" src="./public/Tridev Logo.svg">
         </div>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256"><svg width="256" height="256" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>Layer 1</title>
+  <rect stroke-width="8" rx="10" stroke="#000" id="SvgjsRect1023" height="176" width="176" y="40" x="40" fill="#fff"></rect>
+  <line id="SvgjsLine1022" y2="66" x2="70" y1="42" x1="42" stroke-width="8" stroke="#000" fill="none"></line>
+  <line id="SvgjsLine1021" y2="190" x2="186" y1="214" x1="214" stroke-width="8" stroke="#000" fill="none"></line>
+  <line id="SvgjsLine1020" y2="70" x2="190" y1="42" x1="214" stroke-width="8" stroke="#000" fill="none"></line>
+  <line id="SvgjsLine1019" y2="186" x2="190" y1="214" x1="214" stroke-width="8" stroke="#000" fill="none"></line>
+  <line id="SvgjsLine1018" y2="70" x2="66" y1="42" x1="42" stroke-width="8" stroke="#000" fill="none"></line>
+  <path stroke="null" opacity="0.7" id="SvgjsPath1017" d="m41.42695,214.21298l0,-169.99999l169.00002,169.99999l-169.00002,0z" stroke-width="8" fill="#000"></path>
+  <line id="SvgjsLine1016" y2="66" x2="186" y1="42" x1="214" stroke-width="8" stroke="#000" fill="none"></line>
+  <rect rx="10" stroke-width="8" id="SvgjsRect1015" height="128" width="128" y="64" x="64" stroke="#000" fill="#fff"></rect>
+  <text transform="matrix(1 0 0 1 0 0)" xml:space="preserve" text-anchor="start" font-family="'Roboto Mono'" font-size="54" id="SvgjsText1014" y="149.2" x="111.79375" stroke-width="0" stroke="#000" fill="#000000">K</text>
+ </g>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>

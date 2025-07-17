@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
 
       - name: Set up Git
         run: |
@@ -29,5 +31,3 @@ jobs:
           git add sitemap.xml
           git commit -m "Update sitemap lastmod to $(date -u +"%Y-%m-%d")" || echo "No changes to commit"
           git push
-        with:
-          token: ${{ secrets.GH_PAT }}

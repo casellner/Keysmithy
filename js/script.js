@@ -50,11 +50,13 @@ function generateRandomWord() {
 function increaseRock(amount) {
     numRock += amount;
     document.getElementById('num-rock').innerHTML = numRock;
+    document.getElementById('rock-resource-div').hidden = false;
 }
 
 function increaseWood(amount) {
     numWood += amount;
     document.getElementById('num-wood').innerHTML = numWood;
+    document.getElementById('wood-resource-div').hidden = false;
 }
 
 function updateShopPrices() {

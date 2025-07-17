@@ -26,12 +26,12 @@
 <body>
     <header>
         <h1>Keysmithy (alpha version)</h1>
-        <div  class="justify-center">
-            <div class="justify-center">
+        <div class="justify-center">
+            <div id="rock-resource-div" hidden>
                 <img class="resource-icon" src="./public/rock_resource.png" alt="rock resource icon">
                 <p id="num-rock">0</p>
             </div>
-            <div class="justify-center">
+            <div id="wood-resource-div" hidden>
                 <img class="resource-icon" src="./public/wood_resource.png" alt="wood resource icon">
                 <p id="num-wood">0</p>
             </div>
@@ -75,19 +75,50 @@
         </div>
     </div>
 
-    <div> <!-- SHOP -->
-        <h2>Shop</h2>
+    <div class="row3"> <!-- SHOP -->
         <div>
-            <p>Cost: <span id="pick-cost">X</span> rock</p>
-            <button onClick="upgradePick()">Upgrade Pickaxe</button>
+            <h2>Shop</h2>
+            <p>Spend your resources here!</p>
         </div>
-        <div>
-            <p>Cost: <span id="axe-cost">X</span> wood</p>
-            <button onClick="upgradeAxe()">Upgrade Axe</button>
+
+        <div class="shop-item center-column">
+            <h4>Upgrade Pickaxe</h4>
+            <table>
+                <tr>
+                    <th>Effect</th>
+                    <th>Cost</th>
+                </tr>
+                <tr>
+                    <td>longer word, +1 resource per mine</td>
+                    <td><span id="pick-cost">X</span></td>
+                </tr>
+            </table>
+            <button onClick="upgradePick()">Order Pick Now!</button>
+        </div>
+
+        <div class="shop-item center-column">
+            <h4>Upgrade Axe</h4>
+            <table>
+                <tr>
+                    <th>Effect</th>
+                    <th>Cost</th>
+                </tr>
+                <tr>
+                    <td>longer word, +1 resource per chop</td>
+                    <td><span id="axe-cost">X</span></td>
+                </tr>
+            </table>
+            <button onClick="upgradeAxe()">Order Axe Now!</button>
         </div>
     </div>
 
-    <script src="./script.js"></script>
+    <footer>
+        <p>Copyright © <span id="year"></span> Tuft Development. All Rights Reserved.</p>
+        <p>Background photo by <a href="https://unsplash.com/@bartco86?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Bart Wesolek</a> on <a href="https://unsplash.com/photos/a-close-up-of-a-white-paper-textured-background-U2j1u4BWrpM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></p>
+    </footer>
+    
+    <script src="./js/script.js"></script>
+    <script src="./js/footer.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 body {
     font-family: Special Elite;
     background-image: url("./paper.jpg");
+    background-size: cover;
 }
 
 button, input {

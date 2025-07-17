@@ -75,15 +75,40 @@
         </div>
     </div>
 
-    <div> <!-- SHOP -->
-        <h2>Shop</h2>
+    <div class="row3"> <!-- SHOP -->
         <div>
-            <p>Cost: <span id="pick-cost">X</span> rock</p>
-            <button onClick="upgradePick()">Upgrade Pickaxe</button>
+            <h2>Shop</h2>
+            <p>Spend your resources here!</p>
         </div>
-        <div>
-            <p>Cost: <span id="axe-cost">X</span> wood</p>
-            <button onClick="upgradeAxe()">Upgrade Axe</button>
+
+        <div class="shop-item center-column">
+            <h4>Upgrade Pickaxe</h4>
+            <table>
+                <tr>
+                    <th>Effect</th>
+                    <th>Cost</th>
+                </tr>
+                <tr>
+                    <td>longer word, +1 resource per mine</td>
+                    <td><span id="pick-cost">X</span></td>
+                </tr>
+            </table>
+            <button onClick="upgradePick()">Order Pick Now!</button>
+        </div>
+
+        <div class="shop-item center-column">
+            <h4>Upgrade Axe</h4>
+            <table>
+                <tr>
+                    <th>Effect</th>
+                    <th>Cost</th>
+                </tr>
+                <tr>
+                    <td>longer word, +1 resource per chop</td>
+                    <td><span id="axe-cost">X</span></td>
+                </tr>
+            </table>
+            <button onClick="upgradeAxe()">Order Axe Now!</button>
         </div>
     </div>
 

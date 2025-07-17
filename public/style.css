@@ -37,6 +37,14 @@ p {
     font-size: 1vw;
 }
 
+table, th, td {
+    border: 1px solid;
+}
+
+table {
+    border-collapse: collapse;
+}
+
 footer {
     border-top: black 4px solid;
     margin-top: 10px;
@@ -52,6 +60,15 @@ footer {
 .row2 {
     display: grid;
     grid-template-columns: 50% 50%;
+}
+
+.row3 {
+    display: grid;
+    grid-template-columns: 20% 40% 40%;
+}
+
+.shop-item {
+    border-left: black 4px dashed;
 }
 
 .center-column {

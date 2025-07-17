@@ -37,6 +37,11 @@ p {
     font-size: 1vw;
 }
 
+footer {
+    border-top: black 4px solid;
+    margin-top: 10px;
+}
+
 .row1 {
     display: grid;
     grid-template-columns: 80% 20%;

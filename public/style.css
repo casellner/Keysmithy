@@ -100,3 +100,7 @@ footer {
     height: auto;
     margin-bottom: 10px;
 }
+
+#num-rock, #num-wood {
+    display: inline;
+}

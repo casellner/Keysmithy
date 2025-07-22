@@ -95,6 +95,11 @@ footer {
     margin-right: 5px;
 }
 
+#info {
+    display: flex;
+    justify-content: space-between;
+}
+
 #sponsor {
     width: 100%;
     height: auto;

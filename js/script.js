@@ -24,20 +24,49 @@ const words = [
         "mar", "pro", "aug", "ago", "apr", "via", "bad", "far", "jun", "oil"
     ]
 ];
-let numRock = 0;
-let numWood = 0;
-let pickPower = 1;
-let axePower = 1;
-let pickUpgradeCost = 10;
-let axeUpgradeCost = 10;
+
 let activeResource = "rock";
+
+class Resource {
+    #amount = 0;       // start with 0 of each resource
+    #gatherRate = 1;   // initially, collect 1 at a time
+    #upgradeCost = 10; // cost to upgrade pick or axe
+
+    constructor(name) {
+        this.name = name; // resource name
+    }
+
+    collectResource() {
+        this.#amount += this.#gatherRate;
+        document.getElementById(`num-${this.name}`).innerHTML = this.#amount; // update HTML counter
+        document.getElementById(`${this.name}-resource-div`).hidden = false;  // if resource counter was hidden, show it
+    }
+
+    increaseGatherRate() {
+        if (this.#amount >= this.#upgradeCost) {
+            this.#amount -= this.#upgradeCost; // spend resources
+            this.#gatherRate += 1;             // increase gather rate
+            this.#upgradeCost += 10;           // next upgrade costs more
+            document.getElementById(`${this.name}-cost`).innerHTML = this.#upgradeCost;
+            document.getElementById(`num-${this.name}`).innerHTML = this.#amount;
+            generateRandomWord(); // generate new, longer word
+        }
+    }
+
+    getGatherRate() {
+        return this.#gatherRate;
+    }
+}
+
+let rock = new Resource("rock");
+let wood = new Resource("wood");
 
 function generateRandomWord() {
     let wordIndex
     if (activeResource === "rock") {
-        wordIndex = Math.min(pickPower - 1, words.length - 1); // access word subarray at pickPower - 1, but not past the length of the array
+        wordIndex = Math.min(rock.getGatherRate() - 1, words.length - 1); // access word subarray at gatherRate - 1, but not past the length of the array
     } else if (activeResource === "wood") {
-        wordIndex = Math.min(axePower - 1, words.length - 1); // access word subarray at axePower - 1, but not past the length of the array
+        wordIndex = Math.min(wood.getGatherRate() - 1, words.length - 1); // access word subarray at gatherRate - 1, but not past the length of the array
     }
     
     let rand = Math.floor(Math.random() * words[wordIndex].length); // generate a random integer from 0 to words[wordIndex].length (a valid element of words array)
@@ -45,23 +74,6 @@ function generateRandomWord() {
 
     document.getElementById('rock-input-label').innerHTML = randomWord;
     document.getElementById('wood-input-label').innerHTML = randomWord;
-}
-
-function increaseRock(amount) {
-    numRock += amount;
-    document.getElementById('num-rock').innerHTML = numRock;
-    document.getElementById('rock-resource-div').hidden = false;
-}
-
-function increaseWood(amount) {
-    numWood += amount;
-    document.getElementById('num-wood').innerHTML = numWood;
-    document.getElementById('wood-resource-div').hidden = false;
-}
-
-function updateShopPrices() {
-    document.getElementById('pick-cost').innerHTML = pickUpgradeCost;
-    document.getElementById('axe-cost').innerHTML = axeUpgradeCost;
 }
 
 function toggleResource() {
@@ -82,32 +94,15 @@ function toggleResource() {
 }
 
 function upgradePick() {
-    if (numRock >= pickUpgradeCost) { // if the player has enough to spend
-        increaseRock(-pickUpgradeCost);
-        pickPower += 1;
-
-        pickUpgradeCost += 10;
-        updateShopPrices();
-
-        generateRandomWord(); // reset the word now that it is longer
-    }
+    rock.increaseGatherRate();
 }
 
 function upgradeAxe() {
-    if (numWood >= axeUpgradeCost) { // if the player has enough to spend
-        increaseWood(-axeUpgradeCost);
-        axePower += 1;
-
-        axeUpgradeCost += 10;
-        updateShopPrices();
-
-        generateRandomWord(); // reset the word now that it is longer
-    }
+    wood.increaseGatherRate();
 }
 
 // prepare game environment
 generateRandomWord(); // generate first word
-updateShopPrices();
 
 // event listeners for detecting correct input and keystrokes
 const rockInput = document.getElementById('rock-input');
@@ -119,7 +114,7 @@ rockInput.addEventListener('input', function () {
     if (this.value === randomWord) { // if the user typed the word correctly
         console.log("Nice! You typed:", this.value);
         this.value = ''; // Reset input
-        increaseRock(pickPower);
+        rock.collectResource();
         generateRandomWord();
     }
 });
@@ -128,7 +123,7 @@ woodInput.addEventListener('input', function () {
     if (this.value === randomWord) { // if the user typed the word correctly
         console.log("Nice! You typed:", this.value);
         this.value = ''; // Reset input
-        increaseWood(axePower);
+        wood.collectResource();
         generateRandomWord();
     }
 });

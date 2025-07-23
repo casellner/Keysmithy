@@ -127,3 +127,16 @@ footer {
 #num-rock, #num-wood {
     display: inline;
 }
+
+#rock-resource-div, #wood-resource-div {
+    display: none;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
+}

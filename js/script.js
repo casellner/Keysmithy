@@ -39,7 +39,8 @@ class Resource {
     collectResource() {
         this.#amount += this.#gatherRate;
         document.getElementById(`num-${this.name}`).innerHTML = this.#amount; // update HTML counter
-        document.getElementById(`${this.name}-resource-div`).hidden = false;  // if resource counter was hidden, show it
+        document.getElementById(`${this.name}-resource-div`).style.setProperty('display', 'block'); // remove display: none;
+        document.getElementById(`${this.name}-resource-div`).style.setProperty('animation', '3s fade-in'); // play fade-in animation
     }
 
     increaseGatherRate() {

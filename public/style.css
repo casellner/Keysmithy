@@ -8,6 +8,22 @@ button, input {
     font-family: Special Elite;
 }
 
+button {
+    border: black 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    background: 0;
+    font-size: 1vw;
+}
+
+button:active {
+    transform: translateY(3px);
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 h1 {
     font-family: "Manufacturing Consent", system-ui;
     font-weight: 400;
@@ -48,6 +64,8 @@ table {
 footer {
     border-top: black 4px solid;
     margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .row1 {
@@ -93,6 +111,11 @@ footer {
     width: auto;
     margin-left: 15px;
     margin-right: 5px;
+}
+
+#info {
+    display: flex;
+    justify-content: space-between;
 }
 
 #sponsor {

@@ -97,10 +97,6 @@ footer {
     padding-right: 20px;
 }
 
-.border-left {
-    border-left: black 2px solid;
-}
-
 .justify-center {
     display: flex;
     justify-content: center;
@@ -116,6 +112,17 @@ footer {
 #info {
     display: flex;
     justify-content: space-between;
+}
+
+#div-ad {
+    grid-column: 2;
+    grid-row: 1;
+    border-left: black 2px solid;
+}
+
+#rock-article, #wood-article {
+    grid-column: 1;
+    grid-row: 1;
 }
 
 #sponsor {

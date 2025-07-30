@@ -106,10 +106,19 @@ function upgradeAxe() {
 generateRandomWord(); // generate first word
 
 // event listeners for detecting correct input and keystrokes
+const welcomeInput = document.getElementById('welcome-input');
 const rockInput = document.getElementById('rock-input');
 const woodInput = document.getElementById('wood-input');
 const rockImg = document.getElementById("rock-img");
 const woodImg = document.getElementById("wood-img");
+
+welcomeInput.addEventListener('input', function () {
+    if (this.value === "I love typing!") {
+        document.getElementById('rock-article').hidden = false;
+        document.getElementById('welcome-article').hidden = true;
+        document.getElementById('rock-input').focus();
+    }
+})
 
 rockInput.addEventListener('input', function () {
     if (this.value === randomWord) { // if the user typed the word correctly

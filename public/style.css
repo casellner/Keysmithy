@@ -68,12 +68,6 @@ footer {
     justify-content: space-between;
 }
 
-/* For the socials in the footer. (This can be changed if I add more links later on.) */
-a {
-    text-decoration: none;
-    margin-right: 10px;
-}
-
 .row1 {
     display: grid;
     grid-template-columns: 80% 20%;
@@ -113,6 +107,12 @@ a {
     width: auto;
     margin-left: 15px;
     margin-right: 5px;
+}
+
+/* For the socials in the footer. */
+.socail {
+    text-decoration: none;
+    margin-right: 10px;
 }
 
 #info {

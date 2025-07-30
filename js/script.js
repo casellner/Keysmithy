@@ -41,6 +41,10 @@ class Resource {
         document.getElementById(`num-${this.name}`).innerHTML = this.#amount; // update HTML counter
         document.getElementById(`${this.name}-resource-div`).style.setProperty('display', 'block'); // remove display: none;
         document.getElementById(`${this.name}-resource-div`).style.setProperty('animation', '3s fade-in'); // play fade-in animation
+        
+        if (this.#amount >= 10) {
+            document.getElementById('div-shop').hidden = false;
+        }
     }
 
     increaseGatherRate() {

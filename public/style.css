@@ -109,6 +109,12 @@ footer {
     margin-right: 5px;
 }
 
+/* For the socials in the footer. */
+.social {
+    text-decoration: none;
+    margin-right: 10px;
+}
+
 #info {
     display: flex;
     justify-content: space-between;
@@ -120,9 +126,14 @@ footer {
     border-left: black 2px solid;
 }
 
-#rock-article, #wood-article {
+#welcome-article, #rock-article, #wood-article {
     grid-column: 1;
     grid-row: 1;
+}
+
+#welcome-img {
+    max-height: 18vw;
+    width: auto;
 }
 
 #sponsor {

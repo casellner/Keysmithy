@@ -1,4 +1,9 @@
 :root {
+    /* sizes */
+    --text-regular: 2rem;
+    --text-header: 6rem;
+    --text-subheader: 4rem;
+
     /* borders */
     --border-regular: 4px solid black;
     --border-thick: 8px solid black;   /* currently for the header only */
@@ -12,8 +17,9 @@ body {
     background-size: cover;
 }
 
-button, input {
+button, textarea {
     font-family: Special Elite;
+    font-size: var(--text-regular);
 }
 
 button {
@@ -21,7 +27,6 @@ button {
     border-radius: 10px;
     padding: 10px;
     background: 0;
-    font-size: 1vw;
 }
 
 button:active {
@@ -39,26 +44,26 @@ h1 {
     text-align: center;
     border-top: var(--border-thick);
     border-bottom: var(--border-thick);
-    font-size: 5vw;
+    font-size: var(--text-header);
     margin: 0;
 }
 
 h2 {
     font-family: "Times New Roman", Times, serif;
-    font-size: 3vw;
+    font-size: 4rem;
 }
 
 h3 {
     font-family: "Times New Roman", Times, serif;
-    font-size: 2vw;
+    font-size: 3rem;
 }
 
 label {
-    font-size: 2vw;
+    font-size: var(--text-regular);
 }
 
 p {
-    font-size: 1vw;
+    font-size: var(--text-regular);
 }
 
 table, th, td {

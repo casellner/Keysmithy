@@ -1,3 +1,11 @@
+:root {
+    /* borders */
+    --border-regular: 4px solid black;
+    --border-thick: 8px solid black;   /* currently for the header only */
+    --border-thin: 1px solid black;    /* currently for buttons only */
+    --border-dashed: 4px dashed black; /* currently for items in the shop only */
+}
+
 body {
     font-family: Special Elite;
     background-image: url("./paper.jpg");
@@ -9,7 +17,7 @@ button, input {
 }
 
 button {
-    border: black 1px solid;
+    border: var(--border-thin);
     border-radius: 10px;
     padding: 10px;
     background: 0;
@@ -29,8 +37,8 @@ h1 {
     font-weight: 400;
     font-style: normal;
     text-align: center;
-    border-top: black 8px solid;
-    border-bottom: black 8px solid;
+    border-top: var(--border-thick);
+    border-bottom: var(--border-thick);
     font-size: 5vw;
     margin: 0;
 }
@@ -62,7 +70,6 @@ table {
 }
 
 footer {
-    border-top: black 4px solid;
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
@@ -71,8 +78,7 @@ footer {
 .row1 {
     display: grid;
     grid-template-columns: 80% 20%;
-    border-top: black 4px solid;
-    border-bottom: black 4px solid;
+    border-bottom: var(--border-regular);
 }
 
 .row2 {
@@ -86,7 +92,7 @@ footer {
 }
 
 .shop-item {
-    border-left: black 4px dashed;
+    border-left: var(--border-dashed);
 }
 
 .center-column {
@@ -118,12 +124,13 @@ footer {
 #info {
     display: flex;
     justify-content: space-between;
+    border-bottom: var(--border-regular);
 }
 
 #div-ad {
     grid-column: 2;
     grid-row: 1;
-    border-left: black 2px solid;
+    border-left: var(--border-regular);
 }
 
 #welcome-article, #rock-article, #wood-article {
@@ -148,6 +155,10 @@ footer {
 
 #rock-resource-div, #wood-resource-div {
     display: none;
+}
+
+#div-shop {
+    border-bottom: var(--border-regular);
 }
 
 @keyframes fade-in {

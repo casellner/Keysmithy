@@ -1,3 +1,19 @@
+// Elements on page
+const welcomeArticle = document.getElementById('welcome-article');
+const rockArticle = document.getElementById('rock-article');
+const woodArticle = document.getElementById('wood-article');
+const rockImg = document.getElementById('rock-img');
+const woodImg = document.getElementById('wood-img');
+const rockLabel = document.getElementById('rock-input-label');
+const woodLabel = document.getElementById('wood-input-label');
+const welcomeInput = document.getElementById('welcome-input');
+const rockInput = document.getElementById('rock-input');
+const woodInput = document.getElementById('wood-input');
+
+const shop = document.getElementById('div-shop');
+
+
+// Define random words to type
 let randomWord;
 const words = [
     [
@@ -43,8 +59,8 @@ class Resource {
         document.getElementById(`${this.name}-resource-div`).style.setProperty('animation', '3s fade-in'); // play fade-in animation
         
         if (this.#amount >= 10) {
-            document.getElementById('div-shop').hidden = false;
-            document.getElementById('div-shop').style.setProperty('animation', '3s fade-in');
+            shop.hidden = false;
+            shop.style.setProperty('animation', '3s fade-in');
         }
     }
 
@@ -78,21 +94,21 @@ function generateRandomWord() {
     let rand = Math.floor(Math.random() * words[wordIndex].length); // generate a random integer from 0 to words[wordIndex].length (a valid element of words array)
     randomWord = words[wordIndex][rand];
 
-    document.getElementById('rock-input-label').innerHTML = randomWord;
-    document.getElementById('wood-input-label').innerHTML = randomWord;
+    rockLabel.innerHTML = randomWord;
+    woodLabel.innerHTML = randomWord;
 }
 
 function toggleResource() {
     if (activeResource === "rock") {
         activeResource = "wood";
-        document.getElementById('wood-article').hidden = false;
-        document.getElementById('rock-article').hidden = true;
-        document.getElementById('wood-input').focus();
+        woodArticle.hidden = false;
+        rockArticle.hidden = true;
+        woodInput.focus();
     } else {
         activeResource = "rock";
-        document.getElementById('rock-article').hidden = false;
-        document.getElementById('wood-article').hidden = true;
-        document.getElementById('rock-input').focus();
+        rockArticle.hidden = false;
+        woodArticle.hidden = true;
+        rockInput.focus();
     }
 
     generateRandomWord();
@@ -111,17 +127,12 @@ function upgradeAxe() {
 generateRandomWord(); // generate first word
 
 // event listeners for detecting correct input and keystrokes
-const welcomeInput = document.getElementById('welcome-input');
-const rockInput = document.getElementById('rock-input');
-const woodInput = document.getElementById('wood-input');
-const rockImg = document.getElementById("rock-img");
-const woodImg = document.getElementById("wood-img");
 
 welcomeInput.addEventListener('input', function () {
     if (this.value === "I love typing!") {
-        document.getElementById('rock-article').hidden = false;
-        document.getElementById('welcome-article').hidden = true;
-        document.getElementById('rock-input').focus();
+        rockArticle.hidden = false;
+        welcomeArticle.hidden = true;
+        rockInput.focus();
     }
 })
 

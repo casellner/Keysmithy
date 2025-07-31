@@ -44,6 +44,7 @@ class Resource {
         
         if (this.#amount >= 10) {
             document.getElementById('div-shop').hidden = false;
+            document.getElementById('div-shop').style.setProperty('animation', '3s fade-in');
         }
     }
 

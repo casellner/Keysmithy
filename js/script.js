@@ -83,6 +83,10 @@ class Resource {
 let rock = new Resource("rock");
 let wood = new Resource("wood");
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function generateRandomWord() {
     let wordIndex
     if (activeResource === "rock") {
@@ -96,6 +100,18 @@ function generateRandomWord() {
 
     rockLabel.innerHTML = randomWord;
     woodLabel.innerHTML = randomWord;
+}
+
+async function hideWelcomeArticle() {
+    // hide welcome article
+    welcomeArticle.style.setProperty('animation', '2s fade-out');
+    await sleep(2000);
+    welcomeArticle.hidden = true;
+
+    // show rock article
+    rockArticle.hidden = false;
+    rockArticle.style.setProperty('animation', '2s fade-in')
+    rockInput.focus();
 }
 
 function toggleResource() {
@@ -130,9 +146,7 @@ generateRandomWord(); // generate first word
 
 welcomeInput.addEventListener('input', function () {
     if (this.value === "I love typing!") {
-        rockArticle.hidden = false;
-        welcomeArticle.hidden = true;
-        rockInput.focus();
+        hideWelcomeArticle();
     }
 })
 

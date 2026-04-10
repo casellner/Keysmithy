@@ -1,14 +1,14 @@
 // Elements on page
-const welcomeArticle = document.getElementById('welcome-article');
-const rockArticle = document.getElementById('rock-article');
-const woodArticle = document.getElementById('wood-article');
+//const welcomeArticle = document.getElementById('welcome-article');
+//const rockArticle = document.getElementById('rock-article');
+//const woodArticle = document.getElementById('wood-article');
 const rockImg = document.getElementById('rock-img');
-const woodImg = document.getElementById('wood-img');
-const rockLabel = document.getElementById('rock-input-label');
-const woodLabel = document.getElementById('wood-input-label');
-const welcomeInput = document.getElementById('welcome-input');
-const rockInput = document.getElementById('rock-input');
-const woodInput = document.getElementById('wood-input');
+//const woodImg = document.getElementById('wood-img');
+//const rockLabel = document.getElementById('rock-input-label');
+//const woodLabel = document.getElementById('wood-input-label');
+//const welcomeInput = document.getElementById('welcome-input');
+//const rockInput = document.getElementById('rock-input');
+//const woodInput = document.getElementById('wood-input');
 
 const shop = document.getElementById('div-shop');
 
@@ -102,6 +102,7 @@ function generateRandomWord() {
     woodLabel.innerHTML = randomWord;
 }
 
+/*
 async function hideWelcomeArticle() {
     // hide welcome article
     welcomeArticle.style.setProperty('animation', '2s fade-out');
@@ -113,7 +114,9 @@ async function hideWelcomeArticle() {
     rockArticle.style.setProperty('animation', '2s fade-in')
     rockInput.focus();
 }
+    */
 
+/*
 function toggleResource() {
     if (activeResource === "rock") {
         activeResource = "wood";
@@ -130,6 +133,7 @@ function toggleResource() {
     generateRandomWord();
     //console.log(activeResource);
 }
+    */
 
 function upgradePick() {
     rock.increaseGatherRate();
@@ -169,11 +173,14 @@ woodInput.addEventListener('input', function () {
 });
 
 window.addEventListener("keydown", () => {
+    /*
     if (rockInput === document.activeElement) {
         rockImg.src = "./public/rock_pressed.png";
     } else if (woodInput == document.activeElement) {
         woodImg.src = "./public/rock_pressed.png";
     }
+        */
+    rockImg.src = "./public/rock_pressed.png";
 });
 
 window.addEventListener("keyup", () => {

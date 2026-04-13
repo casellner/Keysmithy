@@ -1,44 +1,23 @@
 // Elements on page
-//const welcomeArticle = document.getElementById('welcome-article');
-//const rockArticle = document.getElementById('rock-article');
-//const woodArticle = document.getElementById('wood-article');
+const timeElement = document.getElementById('time-element');
 const rockImg = document.getElementById('rock-img');
-//const woodImg = document.getElementById('wood-img');
-//const rockLabel = document.getElementById('rock-input-label');
-//const woodLabel = document.getElementById('wood-input-label');
-//const welcomeInput = document.getElementById('welcome-input');
-//const rockInput = document.getElementById('rock-input');
-//const woodInput = document.getElementById('wood-input');
-
-const shop = document.getElementById('div-shop');
+const inputLabel = document.getElementById('input-label');
+const mainInput = document.getElementById('main-input');
 
 
 // Define random words to type
 let randomWord;
 const words = [
-    [
-        "a", "b", "c", "d", "e", "f", "g",
-        "h", "i", "j", "k", "l", "m", "n",
-        "o", "p", "q", "r", "s", "t", "u",
-        "v", "w", "x", "y", "z"
-    ],
-    [
-        "am", "an", "as", "at", "be", "by", "do", "go", "he", "if",
-        "in", "is", "it", "me", "my", "no", "of", "on", "or", "so",
-        "to", "up", "us", "we"
-    ],
-    [
-        "and", "are", "for", "you", "not", "the", "all", "new", "was", "can",
-        "has", "but", "our", "one", "may", "out", "use", "any", "see", "his",
-        "who", "now", "get", "how", "its", "top", "had", "day", "two", "buy",
-        "her", "add", "jan", "she", "set", "map", "way", "off", "did", "car",
-        "own", "end", "him", "per", "big", "law", "art", "usa", "old", "non",
-        "why", "low", "man", "job", "too", "men", "box", "air", "yes", "hot",
-        "say", "dec", "san", "tax", "got", "let", "act", "red", "key", "few",
-        "age", "oct", "pay", "war", "nov", "fax", "yet", "sun", "run", "net",
-        "put", "try", "god", "log", "faq", "fun", "sep", "lot", "ask", "due",
-        "mar", "pro", "aug", "ago", "apr", "via", "bad", "far", "jun", "oil"
-    ]
+    "and", "are", "for", "you", "not", "the", "all", "new", "was", "can",
+    "has", "but", "our", "one", "may", "out", "use", "any", "see", "his",
+    "who", "now", "get", "how", "its", "top", "had", "day", "two", "buy",
+    "her", "add", "jan", "she", "set", "map", "way", "off", "did", "car",
+    "own", "end", "him", "per", "big", "law", "art", "usa", "old", "non",
+    "why", "low", "man", "job", "too", "men", "box", "air", "yes", "hot",
+    "say", "dec", "san", "tax", "got", "let", "act", "red", "key", "few",
+    "age", "oct", "pay", "war", "nov", "fax", "yet", "sun", "run", "net",
+    "put", "try", "god", "log", "faq", "fun", "sep", "lot", "ask", "due",
+    "mar", "pro", "aug", "ago", "apr", "via", "bad", "far", "jun", "oil"
 ];
 
 let activeResource = "rock";
@@ -58,10 +37,12 @@ class Resource {
         document.getElementById(`${this.name}-resource-div`).style.setProperty('display', 'block'); // remove display: none;
         document.getElementById(`${this.name}-resource-div`).style.setProperty('animation', '3s fade-in'); // play fade-in animation
         
+        /*
         if (this.#amount >= 10) {
             shop.hidden = false;
             shop.style.setProperty('animation', '3s fade-in');
         }
+            */
     }
 
     increaseGatherRate() {
@@ -83,23 +64,24 @@ class Resource {
 let rock = new Resource("rock");
 let wood = new Resource("wood");
 
+// TODO: document this function
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function generateRandomWord() {
-    let wordIndex
-    if (activeResource === "rock") {
-        wordIndex = Math.min(rock.getGatherRate() - 1, words.length - 1); // access word subarray at gatherRate - 1, but not past the length of the array
-    } else if (activeResource === "wood") {
-        wordIndex = Math.min(wood.getGatherRate() - 1, words.length - 1); // access word subarray at gatherRate - 1, but not past the length of the array
-    }
-    
-    let rand = Math.floor(Math.random() * words[wordIndex].length); // generate a random integer from 0 to words[wordIndex].length (a valid element of words array)
-    randomWord = words[wordIndex][rand];
+    let rand = Math.floor(Math.random() * words.length); // generate a random integer from 0 to words.length (a valid element of words array)
+    randomWord = words[rand];
 
-    rockLabel.innerHTML = randomWord;
-    woodLabel.innerHTML = randomWord;
+    inputLabel.innerHTML = randomWord;
+}
+
+async function timer() {
+    for (let i = 10; i >= 0; i--) {
+        //console.log(i);
+        timeElement.innerHTML = i;
+        await sleep(1000);
+    }
 }
 
 /*
@@ -135,6 +117,7 @@ function toggleResource() {
 }
     */
 
+/*
 function upgradePick() {
     rock.increaseGatherRate();
 }
@@ -142,19 +125,23 @@ function upgradePick() {
 function upgradeAxe() {
     wood.increaseGatherRate();
 }
+    */
 
 // prepare game environment
 generateRandomWord(); // generate first word
+timer();
 
 // event listeners for detecting correct input and keystrokes
 
+/*
 welcomeInput.addEventListener('input', function () {
     if (this.value === "I love typing!") {
         hideWelcomeArticle();
     }
 })
+    */
 
-rockInput.addEventListener('input', function () {
+mainInput.addEventListener('input', function () {
     if (this.value === randomWord) { // if the user typed the word correctly
         console.log("Nice! You typed:", this.value);
         this.value = ''; // Reset input
@@ -163,6 +150,7 @@ rockInput.addEventListener('input', function () {
     }
 });
 
+/*
 woodInput.addEventListener('input', function () {
     if (this.value === randomWord) { // if the user typed the word correctly
         console.log("Nice! You typed:", this.value);
@@ -171,6 +159,7 @@ woodInput.addEventListener('input', function () {
         generateRandomWord();
     }
 });
+*/
 
 window.addEventListener("keydown", () => {
     /*
@@ -185,5 +174,5 @@ window.addEventListener("keydown", () => {
 
 window.addEventListener("keyup", () => {
     rockImg.src = "./public/rock_idle.png";
-    woodImg.src = "./public/rock_idle.png"
+    //woodImg.src = "./public/rock_idle.png"
 });

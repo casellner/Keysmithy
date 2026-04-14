@@ -84,6 +84,7 @@ async function timer() {
         timeElement.innerHTML = i;
         await sleep(1000);
     }
+    timeElement.innerHTML = 0; // Show that time is out
     showElement(modal);
 }
 

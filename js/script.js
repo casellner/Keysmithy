@@ -84,6 +84,7 @@ async function timer() {
         timeElement.innerHTML = i;
         await sleep(1000);
     }
+    mainInput.disabled = true;
     timeElement.innerHTML = 0; // Show that time is out
     showElement(modal);
 }
@@ -98,20 +99,6 @@ async function hideElement(element) {
     await sleep(2000);
     element.classList.add("hidden");
 }
-
-/*
-async function hideWelcomeArticle() {
-    // hide welcome article
-    welcomeArticle.style.setProperty('animation', '2s fade-out');
-    await sleep(2000);
-    welcomeArticle.hidden = true;
-
-    // show rock article
-    rockArticle.hidden = false;
-    rockArticle.style.setProperty('animation', '2s fade-in')
-    rockInput.focus();
-}
-    */
 
 /*
 function toggleResource() {
@@ -146,15 +133,6 @@ function upgradeAxe() {
 generateRandomWord(); // generate first word
 
 // event listeners for detecting correct input and keystrokes
-
-/*
-welcomeInput.addEventListener('input', function () {
-    if (this.value === "I love typing!") {
-        hideWelcomeArticle();
-    }
-})
-    */
-
 mainInput.addEventListener('input', function () {
     if (this.value === randomWord) { // if the user typed the word correctly
         console.log("Nice! You typed:", this.value);
@@ -163,17 +141,6 @@ mainInput.addEventListener('input', function () {
         generateRandomWord();
     }
 });
-
-/*
-woodInput.addEventListener('input', function () {
-    if (this.value === randomWord) { // if the user typed the word correctly
-        console.log("Nice! You typed:", this.value);
-        this.value = ''; // Reset input
-        wood.collectResource();
-        generateRandomWord();
-    }
-});
-*/
 
 window.addEventListener("keydown", () => {
     /*
@@ -205,11 +172,5 @@ const ContinueBtn = document.getElementById("continue-btn");
 ContinueBtn.addEventListener("click", () => {
     hideElement(modal);
     roundStarted = false;
-});
-
-// Close when clicking outside the modal content
-modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.classList.add("hidden");
-    }
+    mainInput.disabled = false;
 });

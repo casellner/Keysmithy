@@ -1,9 +1,12 @@
+let roundTime = 5; // Time to type words. Set to 60 when done debugging.
+let roundStarted = false;
+let activeResource = "rock"; // Resource selected to gather.
+
 // Elements on page
 const timeElement = document.getElementById('time-element');
 const rockImg = document.getElementById('rock-img');
 const inputLabel = document.getElementById('input-label');
 const mainInput = document.getElementById('main-input');
-
 
 // Define random words to type
 let randomWord;
@@ -20,8 +23,6 @@ const words = [
     "mar", "pro", "aug", "ago", "apr", "via", "bad", "far", "jun", "oil"
 ];
 
-let activeResource = "rock";
-
 class Resource {
     #amount = 0;       // start with 0 of each resource
     #gatherRate = 1;   // initially, collect 1 at a time
@@ -34,17 +35,10 @@ class Resource {
     collectResource() {
         this.#amount += this.#gatherRate;
         document.getElementById(`num-${this.name}`).innerHTML = this.#amount; // update HTML counter
-        document.getElementById(`${this.name}-resource-div`).style.setProperty('display', 'block'); // remove display: none;
-        document.getElementById(`${this.name}-resource-div`).style.setProperty('animation', '3s fade-in'); // play fade-in animation
-        
-        /*
-        if (this.#amount >= 10) {
-            shop.hidden = false;
-            shop.style.setProperty('animation', '3s fade-in');
-        }
-            */
+        showElement(document.getElementById(`${this.name}-resource-div`)) // Show resource if hidden
     }
 
+    /*
     increaseGatherRate() {
         if (this.#amount >= this.#upgradeCost) {
             this.#amount -= this.#upgradeCost; // spend resources
@@ -55,6 +49,7 @@ class Resource {
             generateRandomWord(); // generate new, longer word
         }
     }
+        */
 
     getGatherRate() {
         return this.#gatherRate;
@@ -64,7 +59,14 @@ class Resource {
 let rock = new Resource("rock");
 let wood = new Resource("wood");
 
-// TODO: document this function
+/**
+ * Wait for a period of time.
+ *
+ * @param {number} ms - Time to wait in milliseconds.
+ *
+ * @example
+ * await sleep(2000);
+ */
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -77,11 +79,23 @@ function generateRandomWord() {
 }
 
 async function timer() {
-    for (let i = 10; i >= 0; i--) {
-        //console.log(i);
+    for (let i = roundTime; i > 0; i--) {
+        console.log(i);
         timeElement.innerHTML = i;
         await sleep(1000);
     }
+    showElement(modal);
+}
+
+function showElement(element) {
+    element.classList.remove("hidden");
+    element.style.setProperty('animation', '2s fade-in');
+}
+
+async function hideElement(element) {
+    element.style.setProperty('animation', '2s fade-out');
+    await sleep(2000);
+    element.classList.add("hidden");
 }
 
 /*
@@ -129,7 +143,6 @@ function upgradeAxe() {
 
 // prepare game environment
 generateRandomWord(); // generate first word
-timer();
 
 // event listeners for detecting correct input and keystrokes
 
@@ -170,9 +183,32 @@ window.addEventListener("keydown", () => {
     }
         */
     rockImg.src = "./public/rock_pressed.png";
+    
+    // If the round hasn't started (timer isn't counting down), start it
+    if (!roundStarted) {
+        roundStarted = true;
+        timer();
+    }
 });
 
 window.addEventListener("keyup", () => {
     rockImg.src = "./public/rock_idle.png";
     //woodImg.src = "./public/rock_idle.png"
+});
+
+// TODO: focus trap modal
+// Logic for modals
+const modal = document.getElementById("modal");
+const ContinueBtn = document.getElementById("continue-btn");
+
+ContinueBtn.addEventListener("click", () => {
+    hideElement(modal);
+    roundStarted = false;
+});
+
+// Close when clicking outside the modal content
+modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.classList.add("hidden");
+    }
 });

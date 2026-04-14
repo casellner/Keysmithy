@@ -1,4 +1,4 @@
-let roundTime = 5; // Time to type words. Set to 60 when done debugging.
+let roundTime = 3; // Time to type words. Set to 60 when done debugging.
 let roundStarted = false;
 let activeResource = "rock"; // Resource selected to gather.
 
@@ -38,18 +38,16 @@ class Resource {
         showElement(document.getElementById(`${this.name}-resource-div`)) // Show resource if hidden
     }
 
-    /*
     increaseGatherRate() {
         if (this.#amount >= this.#upgradeCost) {
             this.#amount -= this.#upgradeCost; // spend resources
             this.#gatherRate += 1;             // increase gather rate
-            this.#upgradeCost += 10;           // next upgrade costs more
+            this.#upgradeCost += 1;            // next upgrade costs more
             document.getElementById(`${this.name}-cost`).innerHTML = this.#upgradeCost;
             document.getElementById(`num-${this.name}`).innerHTML = this.#amount;
-            generateRandomWord(); // generate new, longer word
+            //generateRandomWord(); // generate new, longer word
         }
     }
-        */
 
     getGatherRate() {
         return this.#gatherRate;
@@ -119,16 +117,6 @@ function toggleResource() {
 }
     */
 
-/*
-function upgradePick() {
-    rock.increaseGatherRate();
-}
-
-function upgradeAxe() {
-    wood.increaseGatherRate();
-}
-    */
-
 // prepare game environment
 generateRandomWord(); // generate first word
 
@@ -142,7 +130,7 @@ mainInput.addEventListener('input', function () {
     }
 });
 
-window.addEventListener("keydown", () => {
+mainInput.addEventListener("keydown", () => {
     /*
     if (rockInput === document.activeElement) {
         rockImg.src = "./public/rock_pressed.png";
@@ -159,7 +147,7 @@ window.addEventListener("keydown", () => {
     }
 });
 
-window.addEventListener("keyup", () => {
+mainInput.addEventListener("keyup", () => {
     rockImg.src = "./public/rock_idle.png";
     //woodImg.src = "./public/rock_idle.png"
 });
@@ -168,9 +156,15 @@ window.addEventListener("keyup", () => {
 // Logic for modals
 const modal = document.getElementById("modal");
 const ContinueBtn = document.getElementById("continue-btn");
+const rockBtn = document.getElementById("rock-btn");
+
+rockBtn.addEventListener("click", () => {
+    rock.increaseGatherRate();
+});
 
 ContinueBtn.addEventListener("click", () => {
     hideElement(modal);
     roundStarted = false;
     mainInput.disabled = false;
+    timeElement.innerHTML = roundTime;
 });

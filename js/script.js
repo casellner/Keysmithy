@@ -1,10 +1,11 @@
-let roundTime = 3; // Time to type words. Set to 60 when done debugging.
+let roundTime = 5; // Time to type words. Set to 30 when done debugging.
 let roundStarted = false;
 let activeResource = "rock"; // Resource selected to gather.
 
 // Elements on page
 const timeElement = document.getElementById('time-element');
 const rockImg = document.getElementById('rock-img');
+const woodImg = document.getElementById('wood-img')
 const inputLabel = document.getElementById('input-label');
 const mainInput = document.getElementById('main-input');
 
@@ -42,7 +43,7 @@ class Resource {
         if (this.#amount >= this.#upgradeCost) {
             this.#amount -= this.#upgradeCost; // spend resources
             this.#gatherRate += 1;             // increase gather rate
-            this.#upgradeCost += 1;            // next upgrade costs more
+            this.#upgradeCost *= 2;            // next upgrade costs more
             document.getElementById(`${this.name}-cost`).innerHTML = this.#upgradeCost;
             document.getElementById(`num-${this.name}`).innerHTML = this.#amount;
             //generateRandomWord(); // generate new, longer word
@@ -74,6 +75,14 @@ function generateRandomWord() {
     randomWord = words[rand];
 
     inputLabel.innerHTML = randomWord;
+}
+
+function resetEnvironment() {
+    roundStarted = false;
+    generateRandomWord();
+    mainInput.value = "";
+    mainInput.disabled = false;
+    timeElement.innerHTML = roundTime;
 }
 
 async function timer() {
@@ -125,20 +134,23 @@ mainInput.addEventListener('input', function () {
     if (this.value === randomWord) { // if the user typed the word correctly
         console.log("Nice! You typed:", this.value);
         this.value = ''; // Reset input
-        rock.collectResource();
+
+        if (activeResource === "rock") {
+            rock.collectResource();
+        } else if (activeResource === "wood") {
+            wood.collectResource();
+        }
+        
         generateRandomWord();
     }
 });
 
 mainInput.addEventListener("keydown", () => {
-    /*
-    if (rockInput === document.activeElement) {
+    if (activeResource === "rock") {
         rockImg.src = "./public/rock_pressed.png";
-    } else if (woodInput == document.activeElement) {
-        woodImg.src = "./public/rock_pressed.png";
+    } else if (activeResource == "wood") {
+        woodImg.src = "./public/wood_pressed.png";
     }
-        */
-    rockImg.src = "./public/rock_pressed.png";
     
     // If the round hasn't started (timer isn't counting down), start it
     if (!roundStarted) {
@@ -149,7 +161,22 @@ mainInput.addEventListener("keydown", () => {
 
 mainInput.addEventListener("keyup", () => {
     rockImg.src = "./public/rock_idle.png";
-    //woodImg.src = "./public/rock_idle.png"
+    woodImg.src = "./public/wood_idle.png"
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") {
+    e.preventDefault();
+    if (activeResource === "rock") {
+        activeResource = "wood";
+        hideElement(rockImg);
+        showElement(woodImg);
+    } else {
+        activeResource = "rock";
+        hideElement(woodImg);
+        showElement(rockImg);
+    }
+  }
 });
 
 // TODO: focus trap modal
@@ -157,14 +184,17 @@ mainInput.addEventListener("keyup", () => {
 const modal = document.getElementById("modal");
 const ContinueBtn = document.getElementById("continue-btn");
 const rockBtn = document.getElementById("rock-btn");
+const unlockWoodBtn = document.getElementById("unlock-wood-btn");
 
 rockBtn.addEventListener("click", () => {
     rock.increaseGatherRate();
 });
 
+unlockWoodBtn.addEventListener("click", () => {
+    console.log("yea")
+});
+
 ContinueBtn.addEventListener("click", () => {
     hideElement(modal);
-    roundStarted = false;
-    mainInput.disabled = false;
-    timeElement.innerHTML = roundTime;
+    resetEnvironment();
 });

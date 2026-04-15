@@ -30,11 +30,12 @@
     </header>
 
     <div class="center-column">
-        <p id="time-element">60</p>
+        <p id="time-element">30</p>
     </div>
 
     <div class="center-column">
         <img id="rock-img" src="./public/rock_idle.png" alt="temporary mining sprite">
+        <img class="hidden" id="wood-img" src="./public/wood_idle.png" alt="temporary chopping sprite">
 
         <div>
             <label id="input-label" for="main-input"></label>
@@ -43,7 +44,7 @@
         </div>
     </div>
 
-    <div class="center-column">
+    <div>
         <div id="rock-resource-div" class="hidden">
             <img class="resource-icon" src="./public/rock_resource.png" alt="rock resource icon">
             <p id="num-rock">0</p>
@@ -73,10 +74,15 @@
     <div id="modal" class="modal center-column hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <h2 id="modalTitle">Round Over!</h2>
-            <div>
-                <button id="rock-btn" type="button">-<span id="rock-cost">1</span> rock</button>
+            <div class="shop-listing">
+                <button id="rock-btn" type="button">-<span id="rock-cost">10</span> rock</button>
                 <p>pick efficiency +1</p>
             </div>
+            <div class="shop-listing">
+                <button id="unlock-wood-btn" type="button">-<span id="upgrade-wood-cost">20</span> rock</button>
+                <p>unlock wood</p>
+            </div>
+            <br>
             <button id="continue-btn" type="button">Continue</button>
         </div>
     </div>

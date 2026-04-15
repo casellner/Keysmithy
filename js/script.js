@@ -46,7 +46,6 @@ class Resource {
             this.#upgradeCost *= 2;            // next upgrade costs more
             document.getElementById(`${this.name}-cost`).innerHTML = this.#upgradeCost;
             document.getElementById(`num-${this.name}`).innerHTML = this.#amount;
-            //generateRandomWord(); // generate new, longer word
         }
     }
 
@@ -70,6 +69,9 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/**
+ * Select random word from array and update HTML.
+ */
 function generateRandomWord() {
     let rand = Math.floor(Math.random() * words.length); // generate a random integer from 0 to words.length (a valid element of words array)
     randomWord = words[rand];
@@ -77,6 +79,9 @@ function generateRandomWord() {
     inputLabel.innerHTML = randomWord;
 }
 
+/**
+ * Select random word from array and update HTML.
+ */
 function resetEnvironment() {
     roundStarted = false;
     generateRandomWord();
@@ -85,6 +90,9 @@ function resetEnvironment() {
     timeElement.innerHTML = roundTime;
 }
 
+/**
+ * Handles logic for the round timer. Counts down and displays the shop once time is up.
+ */
 async function timer() {
     for (let i = roundTime; i > 0; i--) {
         console.log(i);
@@ -96,38 +104,25 @@ async function timer() {
     showElement(modal);
 }
 
+/**
+ * Plays a fade-in animation for an element.
+ */
 function showElement(element) {
     element.classList.remove("hidden");
     element.style.setProperty('animation', '2s fade-in');
 }
 
+/**
+ * Plays a fade-out animation for an element.
+ */
 async function hideElement(element) {
     element.style.setProperty('animation', '2s fade-out');
     await sleep(2000);
     element.classList.add("hidden");
 }
 
-/*
-function toggleResource() {
-    if (activeResource === "rock") {
-        activeResource = "wood";
-        woodArticle.hidden = false;
-        rockArticle.hidden = true;
-        woodInput.focus();
-    } else {
-        activeResource = "rock";
-        rockArticle.hidden = false;
-        woodArticle.hidden = true;
-        rockInput.focus();
-    }
-
-    generateRandomWord();
-    //console.log(activeResource);
-}
-    */
-
 // prepare game environment
-generateRandomWord(); // generate first word
+resetEnvironment();
 
 // event listeners for detecting correct input and keystrokes
 mainInput.addEventListener('input', function () {
@@ -179,7 +174,6 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// TODO: focus trap modal
 // Logic for modals
 const modal = document.getElementById("modal");
 const ContinueBtn = document.getElementById("continue-btn");

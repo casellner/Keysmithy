@@ -1,47 +1,28 @@
+let roundTime = 5; // Time to type words. Set to 30 when done debugging.
+let roundStarted = false;
+let activeResource = "rock"; // Resource selected to gather.
+
 // Elements on page
-const welcomeArticle = document.getElementById('welcome-article');
-const rockArticle = document.getElementById('rock-article');
-const woodArticle = document.getElementById('wood-article');
+const timeElement = document.getElementById('time-element');
 const rockImg = document.getElementById('rock-img');
-const woodImg = document.getElementById('wood-img');
-const rockLabel = document.getElementById('rock-input-label');
-const woodLabel = document.getElementById('wood-input-label');
-const welcomeInput = document.getElementById('welcome-input');
-const rockInput = document.getElementById('rock-input');
-const woodInput = document.getElementById('wood-input');
-
-const shop = document.getElementById('div-shop');
-
+const woodImg = document.getElementById('wood-img')
+const inputLabel = document.getElementById('input-label');
+const mainInput = document.getElementById('main-input');
 
 // Define random words to type
 let randomWord;
 const words = [
-    [
-        "a", "b", "c", "d", "e", "f", "g",
-        "h", "i", "j", "k", "l", "m", "n",
-        "o", "p", "q", "r", "s", "t", "u",
-        "v", "w", "x", "y", "z"
-    ],
-    [
-        "am", "an", "as", "at", "be", "by", "do", "go", "he", "if",
-        "in", "is", "it", "me", "my", "no", "of", "on", "or", "so",
-        "to", "up", "us", "we"
-    ],
-    [
-        "and", "are", "for", "you", "not", "the", "all", "new", "was", "can",
-        "has", "but", "our", "one", "may", "out", "use", "any", "see", "his",
-        "who", "now", "get", "how", "its", "top", "had", "day", "two", "buy",
-        "her", "add", "jan", "she", "set", "map", "way", "off", "did", "car",
-        "own", "end", "him", "per", "big", "law", "art", "usa", "old", "non",
-        "why", "low", "man", "job", "too", "men", "box", "air", "yes", "hot",
-        "say", "dec", "san", "tax", "got", "let", "act", "red", "key", "few",
-        "age", "oct", "pay", "war", "nov", "fax", "yet", "sun", "run", "net",
-        "put", "try", "god", "log", "faq", "fun", "sep", "lot", "ask", "due",
-        "mar", "pro", "aug", "ago", "apr", "via", "bad", "far", "jun", "oil"
-    ]
+    "and", "are", "for", "you", "not", "the", "all", "new", "was", "can",
+    "has", "but", "our", "one", "may", "out", "use", "any", "see", "his",
+    "who", "now", "get", "how", "its", "top", "had", "day", "two", "buy",
+    "her", "add", "jan", "she", "set", "map", "way", "off", "did", "car",
+    "own", "end", "him", "per", "big", "law", "art", "usa", "old", "non",
+    "why", "low", "man", "job", "too", "men", "box", "air", "yes", "hot",
+    "say", "dec", "san", "tax", "got", "let", "act", "red", "key", "few",
+    "age", "oct", "pay", "war", "nov", "fax", "yet", "sun", "run", "net",
+    "put", "try", "god", "log", "faq", "fun", "sep", "lot", "ask", "due",
+    "mar", "pro", "aug", "ago", "apr", "via", "bad", "far", "jun", "oil"
 ];
-
-let activeResource = "rock";
 
 class Resource {
     #amount = 0;       // start with 0 of each resource
@@ -55,23 +36,16 @@ class Resource {
     collectResource() {
         this.#amount += this.#gatherRate;
         document.getElementById(`num-${this.name}`).innerHTML = this.#amount; // update HTML counter
-        document.getElementById(`${this.name}-resource-div`).style.setProperty('display', 'block'); // remove display: none;
-        document.getElementById(`${this.name}-resource-div`).style.setProperty('animation', '3s fade-in'); // play fade-in animation
-        
-        if (this.#amount >= 10) {
-            shop.hidden = false;
-            shop.style.setProperty('animation', '3s fade-in');
-        }
+        showElement(document.getElementById(`${this.name}-resource-div`)) // Show resource if hidden
     }
 
     increaseGatherRate() {
         if (this.#amount >= this.#upgradeCost) {
             this.#amount -= this.#upgradeCost; // spend resources
             this.#gatherRate += 1;             // increase gather rate
-            this.#upgradeCost += 10;           // next upgrade costs more
+            this.#upgradeCost *= 2;            // next upgrade costs more
             document.getElementById(`${this.name}-cost`).innerHTML = this.#upgradeCost;
             document.getElementById(`num-${this.name}`).innerHTML = this.#amount;
-            generateRandomWord(); // generate new, longer word
         }
     }
 
@@ -83,100 +57,138 @@ class Resource {
 let rock = new Resource("rock");
 let wood = new Resource("wood");
 
+/**
+ * Wait for a period of time.
+ *
+ * @param {number} ms - Time to wait in milliseconds.
+ *
+ * @example
+ * await sleep(2000);
+ */
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/**
+ * Select random word from array and update HTML.
+ */
 function generateRandomWord() {
-    let wordIndex
-    if (activeResource === "rock") {
-        wordIndex = Math.min(rock.getGatherRate() - 1, words.length - 1); // access word subarray at gatherRate - 1, but not past the length of the array
-    } else if (activeResource === "wood") {
-        wordIndex = Math.min(wood.getGatherRate() - 1, words.length - 1); // access word subarray at gatherRate - 1, but not past the length of the array
-    }
-    
-    let rand = Math.floor(Math.random() * words[wordIndex].length); // generate a random integer from 0 to words[wordIndex].length (a valid element of words array)
-    randomWord = words[wordIndex][rand];
+    let rand = Math.floor(Math.random() * words.length); // generate a random integer from 0 to words.length (a valid element of words array)
+    randomWord = words[rand];
 
-    rockLabel.innerHTML = randomWord;
-    woodLabel.innerHTML = randomWord;
+    inputLabel.innerHTML = randomWord;
 }
 
-async function hideWelcomeArticle() {
-    // hide welcome article
-    welcomeArticle.style.setProperty('animation', '2s fade-out');
-    await sleep(2000);
-    welcomeArticle.hidden = true;
-
-    // show rock article
-    rockArticle.hidden = false;
-    rockArticle.style.setProperty('animation', '2s fade-in')
-    rockInput.focus();
-}
-
-function toggleResource() {
-    if (activeResource === "rock") {
-        activeResource = "wood";
-        woodArticle.hidden = false;
-        rockArticle.hidden = true;
-        woodInput.focus();
-    } else {
-        activeResource = "rock";
-        rockArticle.hidden = false;
-        woodArticle.hidden = true;
-        rockInput.focus();
-    }
-
+/**
+ * Select random word from array and update HTML.
+ */
+function resetEnvironment() {
+    roundStarted = false;
     generateRandomWord();
-    //console.log(activeResource);
+    mainInput.value = "";
+    mainInput.disabled = false;
+    timeElement.innerHTML = roundTime;
 }
 
-function upgradePick() {
-    rock.increaseGatherRate();
+/**
+ * Handles logic for the round timer. Counts down and displays the shop once time is up.
+ */
+async function timer() {
+    for (let i = roundTime; i > 0; i--) {
+        console.log(i);
+        timeElement.innerHTML = i;
+        await sleep(1000);
+    }
+    mainInput.disabled = true;
+    timeElement.innerHTML = 0; // Show that time is out
+    showElement(modal);
 }
 
-function upgradeAxe() {
-    wood.increaseGatherRate();
+/**
+ * Plays a fade-in animation for an element.
+ */
+function showElement(element) {
+    element.classList.remove("hidden");
+    element.style.setProperty('animation', '2s fade-in');
+}
+
+/**
+ * Plays a fade-out animation for an element.
+ */
+async function hideElement(element) {
+    element.style.setProperty('animation', '2s fade-out');
+    await sleep(2000);
+    element.classList.add("hidden");
 }
 
 // prepare game environment
-generateRandomWord(); // generate first word
+resetEnvironment();
 
 // event listeners for detecting correct input and keystrokes
-
-welcomeInput.addEventListener('input', function () {
-    if (this.value === "I love typing!") {
-        hideWelcomeArticle();
-    }
-})
-
-rockInput.addEventListener('input', function () {
+mainInput.addEventListener('input', function () {
     if (this.value === randomWord) { // if the user typed the word correctly
         console.log("Nice! You typed:", this.value);
         this.value = ''; // Reset input
-        rock.collectResource();
+
+        if (activeResource === "rock") {
+            rock.collectResource();
+        } else if (activeResource === "wood") {
+            wood.collectResource();
+        }
+        
         generateRandomWord();
     }
 });
 
-woodInput.addEventListener('input', function () {
-    if (this.value === randomWord) { // if the user typed the word correctly
-        console.log("Nice! You typed:", this.value);
-        this.value = ''; // Reset input
-        wood.collectResource();
-        generateRandomWord();
-    }
-});
-
-window.addEventListener("keydown", () => {
-    if (rockInput === document.activeElement) {
+mainInput.addEventListener("keydown", () => {
+    if (activeResource === "rock") {
         rockImg.src = "./public/rock_pressed.png";
-    } else if (woodInput == document.activeElement) {
-        woodImg.src = "./public/rock_pressed.png";
+    } else if (activeResource == "wood") {
+        woodImg.src = "./public/wood_pressed.png";
+    }
+    
+    // If the round hasn't started (timer isn't counting down), start it
+    if (!roundStarted) {
+        roundStarted = true;
+        timer();
     }
 });
 
-window.addEventListener("keyup", () => {
+mainInput.addEventListener("keyup", () => {
     rockImg.src = "./public/rock_idle.png";
-    woodImg.src = "./public/rock_idle.png"
+    woodImg.src = "./public/wood_idle.png"
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") {
+    e.preventDefault();
+    if (activeResource === "rock") {
+        activeResource = "wood";
+        hideElement(rockImg);
+        showElement(woodImg);
+    } else {
+        activeResource = "rock";
+        hideElement(woodImg);
+        showElement(rockImg);
+    }
+  }
+});
+
+// Logic for modals
+const modal = document.getElementById("modal");
+const ContinueBtn = document.getElementById("continue-btn");
+const rockBtn = document.getElementById("rock-btn");
+const unlockWoodBtn = document.getElementById("unlock-wood-btn");
+
+rockBtn.addEventListener("click", () => {
+    rock.increaseGatherRate();
+});
+
+unlockWoodBtn.addEventListener("click", () => {
+    console.log("yea")
+});
+
+ContinueBtn.addEventListener("click", () => {
+    hideElement(modal);
+    resetEnvironment();
 });

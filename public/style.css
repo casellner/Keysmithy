@@ -1,169 +1,41 @@
-:root {
-    /* sizes */
-    --text-regular: 2rem;
-    --text-header: 6rem;
-    --text-subheader: 4rem;
-
-    /* borders */
-    --border-regular: 4px solid black;
-    --border-thick: 8px solid black;   /* currently for the header only */
-    --border-thin: 1px solid black;    /* currently for buttons only */
-    --border-dashed: 4px dashed black; /* currently for items in the shop only */
-}
-
-body {
-    font-family: Special Elite;
-    background-image: url("./paper.jpg");
-    background-size: cover;
-}
-
-button, textarea {
-    font-family: Special Elite;
-    font-size: var(--text-regular);
-}
-
-button {
-    border: var(--border-thin);
-    border-radius: 10px;
-    padding: 10px;
-    background: 0;
-}
-
-button:active {
-    transform: translateY(3px);
-}
-
-button:hover {
-    cursor: pointer;
-}
-
-h1 {
-    font-family: "Manufacturing Consent", system-ui;
-    font-weight: 400;
-    font-style: normal;
-    text-align: center;
-    border-top: var(--border-thick);
-    border-bottom: var(--border-thick);
-    font-size: var(--text-header);
-    margin: 0;
-}
-
-h2 {
-    font-family: "Times New Roman", Times, serif;
-    font-size: 4rem;
-}
-
-h3 {
-    font-family: "Times New Roman", Times, serif;
-    font-size: 3rem;
-}
-
-label {
-    font-size: var(--text-regular);
-}
-
-p {
-    font-size: var(--text-regular);
-}
-
-table, th, td {
-    border: 1px solid;
-}
-
-table {
-    border-collapse: collapse;
-}
-
-footer {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.row1 {
-    display: grid;
-    grid-template-columns: 80% 20%;
-    border-bottom: var(--border-regular);
-}
-
-.row2 {
-    display: grid;
-    grid-template-columns: 50% 50%;
-}
-
-.row3 {
-    display: grid;
-    grid-template-columns: 20% 40% 40%;
-}
-
-.shop-item {
-    border-left: var(--border-dashed);
-}
-
 .center-column {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.justify-center {
-    display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.resource-icon {
-    height: 2vw;
-    width: auto;
-    margin-left: 15px;
-    margin-right: 5px;
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-/* For the socials in the footer. */
+.hidden {
+    display: none;
+}
+
+/* For the social buttons in the footer. */
 .social {
     text-decoration: none;
     margin-right: 10px;
 }
 
-#info {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: var(--border-regular);
-}
-
-#div-ad {
-    grid-column: 2;
-    grid-row: 1;
-    border-left: var(--border-regular);
-}
-
-#welcome-article, #rock-article, #wood-article {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-#welcome-img {
-    max-height: 18vw;
-    width: auto;
-}
-
-#sponsor {
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    margin-bottom: 10px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
 }
 
-#num-rock, #num-wood {
-    display: inline;
-}
-
-#rock-resource-div, #wood-resource-div {
-    display: none;
-}
-
-#div-shop {
-    border-bottom: var(--border-regular);
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
 }
 
 @keyframes fade-in {

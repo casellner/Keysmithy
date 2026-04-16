@@ -2,7 +2,7 @@ let roundTime = 5; // Time to type words. Set to 30 when done debugging.
 let roundStarted = false;
 let activeResource = "rock"; // Resource selected to gather.
 
-// Elements on page
+// Elements on main page
 const timeElement = document.getElementById('time-element');
 const rockImg = document.getElementById('rock-img');
 const woodImg = document.getElementById('wood-img')
@@ -27,26 +27,36 @@ const words = [
 class Resource {
     #amount = 0;       // start with 0 of each resource
     #gatherRate = 1;   // initially, collect 1 at a time
-    #upgradeCost = 10; // cost to upgrade pick or axe
+    //#upgradeCost = 10; // cost to upgrade pick or axe
 
     constructor(name) {
         this.name = name; // resource name
     }
 
-    collectResource() {
-        this.#amount += this.#gatherRate;
-        document.getElementById(`num-${this.name}`).innerHTML = this.#amount; // update HTML counter
+    updateCounter() {
+        document.getElementById(`num-${this.name}`).innerHTML = this.#amount;
         showElement(document.getElementById(`${this.name}-resource-div`)) // Show resource if hidden
     }
 
-    increaseGatherRate() {
-        if (this.#amount >= this.#upgradeCost) {
-            this.#amount -= this.#upgradeCost; // spend resources
-            this.#gatherRate += 1;             // increase gather rate
-            this.#upgradeCost *= 2;            // next upgrade costs more
-            document.getElementById(`${this.name}-cost`).innerHTML = this.#upgradeCost;
-            document.getElementById(`num-${this.name}`).innerHTML = this.#amount;
+    collectResource() {
+        this.#amount += this.#gatherRate;
+        this.updateCounter();
+    }
+
+    spendResource(amt) {
+        if (amt > 0) { // prevents an update from happening if nothing is spent
+            this.#amount -= amt;
+            this.updateCounter();
         }
+    }
+
+    increaseGatherRate() {
+        this.#gatherRate += 1;
+        //this.#upgradeCost *= 2; // next upgrade costs more
+    }
+
+    getAmount() {
+        return this.#amount;
     }
 
     getGatherRate() {
@@ -58,9 +68,32 @@ let rock = new Resource("rock");
 let wood = new Resource("wood");
 
 /**
+ * Attempt to spend resources. Return true if able, false otherwise.
+ *
+ * @param {number} rockSpend Amount of rock to try spending.
+ * @param {number} woodSpend Amount of wood to try spending.
+ *
+ * @returns {boolean} True if resources were spent, false if not enough resources.
+ * 
+ * @example
+ * if (spendResources(1, 2)) {
+ *     // Do something
+ * }
+ */
+function spendResources(rockSpend, woodSpend) {
+    if ((rock.getAmount() >= rockSpend) && (wood.getAmount() >= woodSpend)) {
+        rock.spendResource(rockSpend);
+        wood.spendResource(woodSpend);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
  * Wait for a period of time.
  *
- * @param {number} ms - Time to wait in milliseconds.
+ * @param {number} ms Time to wait in milliseconds.
  *
  * @example
  * await sleep(2000);
@@ -181,11 +214,15 @@ const rockBtn = document.getElementById("rock-btn");
 const unlockWoodBtn = document.getElementById("unlock-wood-btn");
 
 rockBtn.addEventListener("click", () => {
-    rock.increaseGatherRate();
+    if (spendResources(10, 0)) {
+        rock.increaseGatherRate();
+    }
 });
 
 unlockWoodBtn.addEventListener("click", () => {
-    console.log("yea")
+    if (spendResources(20, 0)) {
+        // TODO: unlock wood
+    }
 });
 
 ContinueBtn.addEventListener("click", () => {

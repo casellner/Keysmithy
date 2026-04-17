@@ -9,6 +9,12 @@ const woodImg = document.getElementById('wood-img')
 const inputLabel = document.getElementById('input-label');
 const mainInput = document.getElementById('main-input');
 
+// Modal and its elements
+const modal = document.getElementById("modal");
+const continueBtn = document.getElementById("continue-btn");
+const rockBtn = document.getElementById("rock-btn");
+const unlockWoodBtn = document.getElementById("unlock-wood-btn");
+
 // Define random words to type
 let randomWord;
 const words = [
@@ -135,6 +141,7 @@ async function timer() {
     mainInput.disabled = true;
     timeElement.innerHTML = 0; // Show that time is out
     showElement(modal);
+    continueBtn.focus();
 }
 
 /**
@@ -208,11 +215,6 @@ document.addEventListener("keydown", (e) => {
 });
 
 // Logic for modals
-const modal = document.getElementById("modal");
-const ContinueBtn = document.getElementById("continue-btn");
-const rockBtn = document.getElementById("rock-btn");
-const unlockWoodBtn = document.getElementById("unlock-wood-btn");
-
 rockBtn.addEventListener("click", () => {
     if (spendResources(10, 0)) {
         rock.increaseGatherRate();
@@ -225,7 +227,8 @@ unlockWoodBtn.addEventListener("click", () => {
     }
 });
 
-ContinueBtn.addEventListener("click", () => {
+continueBtn.addEventListener("click", () => {
     hideElement(modal);
     resetEnvironment();
+    mainInput.focus();
 });
